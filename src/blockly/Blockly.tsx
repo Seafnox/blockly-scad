@@ -1,5 +1,6 @@
 import BlocklyType from 'core/blockly';
 import { Component, CSSProperties } from 'react';
+import { IdeEventBusCallback } from '../services/ideEventBus';
 import { BlocklyService } from './BlocklyService';
 import { IdeStateService } from '../services/ideStateService';
 import { blocklyThemeDark } from './BlocklyThemeDark';
@@ -11,11 +12,10 @@ export class Blockly extends Component<unknown, Blockly> {
   blocklyContainer?: HTMLDivElement | null;
   blocklyArea?: HTMLDivElement | null;
   blocklyDiv?: HTMLDivElement | null;
+  resizeCallback?: IdeEventBusCallback<unknown>;
 
   componentDidMount() {
     console.log('make workspace');
-    this.blockly.getMainWorkspace()?.dispose();
-    console.log(this.blockly.getMainWorkspace());
     const workspace: BlocklyType.Workspace = this.blockly.inject(
       this.blocklyDiv!,
       {
@@ -35,8 +35,14 @@ export class Blockly extends Component<unknown, Blockly> {
     );
     workspace.addChangeListener(this.ideState.updateWorkspace);
 
-    this.ideState.resize.addCallback(() => this.onResize());
+    this.resizeCallback = () => this.onResize();
+    this.ideState.resize.addCallback(this.resizeCallback);
     this.onResize();
+  }
+
+  public componentWillUnmount() {
+    this.resizeCallback && this.ideState.resize.removeCallback(this.resizeCallback);
+    this.blockly.getMainWorkspace()?.dispose();
   }
 
   onResize() {
@@ -47,13 +53,13 @@ export class Blockly extends Component<unknown, Blockly> {
     }
     const blocklyDiv = this.blocklyDiv;
     if (blocklyArea && blocklyDiv) {
-      blocklyDiv.style.left = '0px'; // x + 'px';
-      blocklyDiv.style.top = '0px'; // y + 'px';
+      blocklyDiv.style.left = '0px';
+      blocklyDiv.style.top = '0px';
       blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
       blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 
     }
-    setTimeout(() => this.blockly.svgResize(this.blockly.mainWorkspace!));
+    setTimeout(() => this.blockly.svgResize(this.blockly.getMainWorkspace()));
   }
 
   render() {

@@ -7,6 +7,10 @@ export class IdeEventBus<T> {
     this.callbackList.push(callback);
   }
 
+  removeCallback(targetCallback: IdeEventBusCallback<T>): void {
+    this.callbackList = this.callbackList.filter(callback => callback !== targetCallback);
+  }
+
   emit(event: T): void {
     this.callbackList.forEach(function(cb) {
       cb(event);
