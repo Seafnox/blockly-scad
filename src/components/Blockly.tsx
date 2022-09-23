@@ -1,4 +1,4 @@
-import React, { Component, useRef, CSSProperties } from 'react';
+import React, { Component, CSSProperties } from 'react';
 import { BlocklyService, BlocklyWorkspace } from '../services/blocklyService';
 import { IdeStateService } from '../services/ideStateService';
 import { toolbox } from '../utlis/toolbox';
@@ -46,7 +46,7 @@ export class Blockly extends Component<unknown, Blockly> {
       blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 
     }
-    setTimeout(() => this.blockly.svgResize(this.blockly.mainWorkspace));
+    //setTimeout(() => this.blockly.svgResize(this.blockly.mainWorkspace));
   }
 
   render() {
@@ -54,10 +54,12 @@ export class Blockly extends Component<unknown, Blockly> {
       width: '100%',
       height: '100%',
       position: 'relative',
+      overflow: 'scroll',
     };
     const styleBArea: CSSProperties = {};
     const styleBDiv: CSSProperties = {
       position: 'absolute',
+      margin: 0,
     };
     return (
       <div id="blocklyContainer" ref={ref => this.blocklyContainer = ref} style={styleDiv}>

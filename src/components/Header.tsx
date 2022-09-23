@@ -1,5 +1,5 @@
-import { Component } from 'react';
-import { version } from '../../package.json';
+import { Component, CSSProperties } from 'react';
+import packageInfo from '../../package.json';
 import { saveAs } from 'file-saver';
 import { IdeStateService } from '../services/ideStateService';
 
@@ -55,13 +55,20 @@ export class Header extends Component {
   }
 
   render() {
+    const headerStyle: CSSProperties = {
+      height: '50px',
+      verticalAlign: 'middle',
+      lineHeight: '50px',
+      borderBottom: '1px solid #666666',
+    };
+
     return (
-      <div>
+      <div style={headerStyle}>
         <input id="open-js-file" type="file" name="openjsfile" accept=".js" style={{display: 'none'}}/>
         <button onClick={this.open}>Open</button>
         <button onClick={this.saveModule}>Save JS Code</button>
         <button onClick={this.saveDemo}>Save JS Demo</button>
-        <span><b> BlocklySCAD</b> (Alpha) {version} by Kirill Warp</span>
+        <span><b> BlocklySCAD</b> (Alpha) {packageInfo.version} by Kirill Warp</span>
       </div>
     );
   }

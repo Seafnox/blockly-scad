@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component, Fragment, CSSProperties } from 'react';
 import Split from 'react-split';
 import { Blockly } from './components/Blockly';
 import { Console } from './components/Console';
@@ -8,7 +8,7 @@ import './App.css';
 import { Preview } from './components/Preview';
 import { IdeStateService } from './services/ideStateService';
 
-export class App extends Component<App, App> {
+export class App extends Component<unknown, App> {
   ideService = IdeStateService.instance();
 
   componentDidMount() {
@@ -25,15 +25,24 @@ export class App extends Component<App, App> {
   }
 
   render() {
+    const mainSplitStyle: CSSProperties = {
+      height: 'calc(100vh - 50px)',
+      display: 'flex',
+    };
+    const secondSplitStyle: CSSProperties = {
+      height: 'inherit',
+      display: 'flex',
+      flexDirection: 'column',
+    }
     return (
       <Fragment>
         <Header></Header>
-        <Split direction="vertical" sizes={[50, 50]} onDrag={this.onVerticalSplitDrag}>
-          <Split direction="horizontal" sizes={[75, 25]} onDrag={this.onHorizontalSplitDrag}>
+        <Split style={mainSplitStyle} direction="horizontal" sizes={[50, 50]} onDrag={this.onVerticalSplitDrag}>
+          <Split style={secondSplitStyle} direction="vertical" sizes={[75, 25]} onDrag={this.onHorizontalSplitDrag}>
             <Blockly/>
             <Console/>
           </Split>
-          <Split direction="horizontal" sizes={[50, 50]}>
+          <Split style={secondSplitStyle} direction="vertical" sizes={[50, 50]}>
             <Preview/>
             <Editor/>
           </Split>
