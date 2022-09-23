@@ -5,6 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #333333;
+  color: #cccccc;
 }
 
 code {
@@ -17,8 +19,7 @@ code {
 }
 
 .gutter {
-  background: #282c34;
-  border: 2px solid #333333;
+  background: #444444;
   cursor: ew-resize;
 }
 .gutter-vertical {

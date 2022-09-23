@@ -1,7 +1,9 @@
-import React, { Component, CSSProperties } from 'react';
-import { BlocklyService, BlocklyWorkspace } from '../services/blocklyService';
+import BlocklyType from 'core/blockly';
+import { Component, CSSProperties } from 'react';
+import { BlocklyService } from './BlocklyService';
 import { IdeStateService } from '../services/ideStateService';
-import { toolbox } from '../utlis/toolbox';
+import { blocklyThemeDark } from './BlocklyThemeDark';
+import { toolbox } from './toolbox';
 
 export class Blockly extends Component<unknown, Blockly> {
   blockly = BlocklyService.instance();
@@ -12,12 +14,13 @@ export class Blockly extends Component<unknown, Blockly> {
 
   componentDidMount() {
     console.log('make workspace');
-    this.blockly.mainWorkspace?.dispose();
-    console.log(this.blockly.mainWorkspace);
-    const workspace: BlocklyWorkspace = this.blockly.inject(
+    this.blockly.getMainWorkspace()?.dispose();
+    console.log(this.blockly.getMainWorkspace());
+    const workspace: BlocklyType.Workspace = this.blockly.inject(
       this.blocklyDiv!,
       {
         toolbox,
+        theme: blocklyThemeDark,
         zoom:
           {
             controls: true,

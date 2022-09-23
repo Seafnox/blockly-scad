@@ -21,7 +21,7 @@ export class Header extends Component {
       type: 'text/plain',
     });
     console.log(saveAs);
-    saveAs(blob, `${state.fileName}.demo.js`);
+    saveAs(blob, `${state.fileName}.module.js`);
   }
 
   open() {
@@ -51,7 +51,6 @@ export class Header extends Component {
   componentDidMount() {
     const openFile = document.getElementById('open-js-file')!;
     openFile.addEventListener('change', this.openjs, false);
-    //this.openFileInput.addEventListener('change', this.openjs, false);
   }
 
   render() {

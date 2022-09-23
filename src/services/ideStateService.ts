@@ -3,7 +3,7 @@ import {
   TransactionSpec,
 } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
-import { BlocklyService } from './blocklyService';
+import { BlocklyService } from '../blockly/BlocklyService';
 import { IdeConsole } from './ideConsole';
 import { IdeEventBus } from './ideEventBus';
 

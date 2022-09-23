@@ -1,6 +1,6 @@
-import React, { Component, Fragment, CSSProperties } from 'react';
+import { Component, Fragment, CSSProperties } from 'react';
 import Split from 'react-split';
-import { Blockly } from './components/Blockly';
+import { Blockly } from './blockly/Blockly';
 import { Console } from './components/Console';
 import { Editor } from './components/Editor';
 import { Header } from './components/Header';
