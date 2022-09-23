@@ -2,10 +2,10 @@ import { Component, Fragment, CSSProperties } from 'react';
 import Split from 'react-split';
 import { Blockly } from './blockly/Blockly';
 import { Console } from './components/Console';
-import { Editor } from './components/Editor';
+import { Editor } from './editor/Editor';
 import { Header } from './components/Header';
 import './App.css';
-import { Preview } from './components/Preview';
+import { Preview } from './preview/Preview';
 import { IdeStateService } from './services/ideStateService';
 
 export class App extends Component<unknown, App> {

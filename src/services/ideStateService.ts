@@ -11,9 +11,9 @@ export interface IdeState {
   debug: boolean;
   b2c_error: boolean;
   fileName: string;
-  code: string;
-  code_prev: string;
-  blockly_code: string;
+  editorCode: string;
+  editorCodePrev: string;
+  blocklyCode: string;
   resize: IdeEventBus<void>,
   console: IdeConsole;
   updateWorkspace: () => void;
@@ -44,9 +44,9 @@ export class IdeStateService {
       debug: true,
       b2c_error: false,
       fileName: 'example',
-      code: 'var i=10',
-      code_prev: '',
-      blockly_code: 'var i=10',
+      editorCode: 'var i=10',
+      editorCodePrev: '',
+      blocklyCode: 'var i=10',
       resize: new IdeEventBus<void>(),
       console: new IdeConsole(),
       updateWorkspace: () => IdeStateService.updateWorkspace(),
@@ -56,11 +56,11 @@ export class IdeStateService {
   private static updateWorkspace(): void {
     let Blockly = BlocklyService.instance();
     console.log('updateWorkspace');
-    let blockly_code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace!);
-    IdeStateService.#instance.blockly_code = blockly_code;
+    let blocklyCode = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace!);
+    IdeStateService.#instance.blocklyCode = blocklyCode;
     const editor = IdeStateService.#instance.editor;
     if (editor) {
-      const state: EditorState = IdeStateService.makeEditorState(editor, blockly_code);
+      const state: EditorState = IdeStateService.makeEditorState(editor, blocklyCode);
       editor.setState(state);
     }
   }

@@ -7,7 +7,7 @@ export class Header extends Component {
   saveDemo() {
     console.log('Save JS Demo');
     const state = IdeStateService.instance();
-    const blob = new Blob([state.code], {
+    const blob = new Blob([state.editorCode], {
       type: 'text/plain',
     });
     console.log(saveAs);
@@ -17,7 +17,7 @@ export class Header extends Component {
   saveModule() {
     console.log('Save Generated JS');
     const state = IdeStateService.instance();
-    const blob = new Blob([state.blockly_code], {
+    const blob = new Blob([state.blocklyCode], {
       type: 'text/plain',
     });
     console.log(saveAs);
@@ -36,10 +36,10 @@ export class Header extends Component {
       const reader = new FileReader();
       reader.onload = function() {
         const state = IdeStateService.instance();
-        state.code = reader.result?.toString() || '';
-        state.code_prev = state.code;
+        state.editorCode = reader.result?.toString() || '';
+        state.editorCodePrev = state.editorCode;
         if (state.editor) {
-          const newState = IdeStateService.makeEditorState(state.editor, state.code);
+          const newState = IdeStateService.makeEditorState(state.editor, state.editorCode);
           state.editor?.setState(newState);
         }
 
