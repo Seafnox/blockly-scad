@@ -11,6 +11,9 @@ export class Blockly extends Component<unknown, Blockly> {
   blocklyDiv?: HTMLDivElement | null;
 
   componentDidMount() {
+    console.log('make workspace');
+    this.blockly.mainWorkspace?.dispose();
+    console.log(this.blockly.mainWorkspace);
     const workspace: BlocklyWorkspace = this.blockly.inject(
       this.blocklyDiv!,
       {
@@ -34,6 +37,7 @@ export class Blockly extends Component<unknown, Blockly> {
   }
 
   onResize() {
+    console.log('resize workspace');
     const blocklyArea = this.blocklyArea;
     if (blocklyArea && this.blocklyContainer) {
       blocklyArea.style.height = this.blocklyContainer?.offsetHeight + 'px';
@@ -46,7 +50,7 @@ export class Blockly extends Component<unknown, Blockly> {
       blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 
     }
-    //setTimeout(() => this.blockly.svgResize(this.blockly.mainWorkspace));
+    setTimeout(() => this.blockly.svgResize(this.blockly.mainWorkspace!));
   }
 
   render() {
@@ -54,7 +58,7 @@ export class Blockly extends Component<unknown, Blockly> {
       width: '100%',
       height: '100%',
       position: 'relative',
-      overflow: 'scroll',
+      overflow: 'none',
     };
     const styleBArea: CSSProperties = {};
     const styleBDiv: CSSProperties = {

@@ -1,15 +1,5 @@
 import {
-  Text,
   EditorState,
-  ChangeSet,
-  ChangeSpec,
-  CharCategory,
-  EditorSelection,
-  Facet,
-  SelectionRange,
-  StateEffect,
-  StateField,
-  Transaction,
   TransactionSpec,
 } from '@codemirror/state';
 import { EditorView } from '@codemirror/view';
@@ -66,7 +56,7 @@ export class IdeStateService {
   private static updateWorkspace(): void {
     let Blockly = BlocklyService.instance();
     console.log('updateWorkspace');
-    let blockly_code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace);
+    let blockly_code = Blockly.JavaScript.workspaceToCode(Blockly.mainWorkspace!);
     IdeStateService.#instance.blockly_code = blockly_code;
     const editor = IdeStateService.#instance.editor;
     if (editor) {

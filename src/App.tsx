@@ -12,17 +12,19 @@ export class App extends Component<unknown, App> {
   ideService = IdeStateService.instance();
 
   componentDidMount() {
-    window.addEventListener('resize', () => IdeStateService.instance().resize.emit(), false);
+    window.addEventListener('resize', () => this.ideService.resize.emit(), false);
     this.ideService.resize.emit();
   }
 
-  onVerticalSplitDrag() {
+  onMainSplitDrag() {
     this.ideService.resize.emit();
   }
 
-  onHorizontalSplitDrag() {
+  onLeftPartSplitDrag() {
     this.ideService.resize.emit();
   }
+
+  onRightPartSplitDrag() {}
 
   render() {
     const mainSplitStyle: CSSProperties = {
@@ -37,12 +39,12 @@ export class App extends Component<unknown, App> {
     return (
       <Fragment>
         <Header></Header>
-        <Split style={mainSplitStyle} direction="horizontal" sizes={[50, 50]} onDrag={this.onVerticalSplitDrag}>
-          <Split style={secondSplitStyle} direction="vertical" sizes={[75, 25]} onDrag={this.onHorizontalSplitDrag}>
+        <Split style={mainSplitStyle} direction="horizontal" sizes={[50, 50]} onDrag={() => this.onMainSplitDrag()}>
+          <Split style={secondSplitStyle} direction="vertical" sizes={[85, 15]} onDrag={() => this.onLeftPartSplitDrag()}>
             <Blockly/>
             <Console/>
           </Split>
-          <Split style={secondSplitStyle} direction="vertical" sizes={[50, 50]}>
+          <Split style={secondSplitStyle} direction="vertical" sizes={[50, 50]} onDrag={() => this.onRightPartSplitDrag()}>
             <Preview/>
             <Editor/>
           </Split>

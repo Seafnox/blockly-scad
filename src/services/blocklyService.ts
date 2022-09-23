@@ -8,7 +8,7 @@ export interface BlocklyWorkspace {
 }
 
 export interface BlocklyDef {
-  mainWorkspace: Workspace;
+  mainWorkspace?: Workspace;
   svgResize: (workspace: Workspace) => void;
   inject: (element: HTMLElement, options: BlocklyOptions) => Workspace;
   JavaScript: {

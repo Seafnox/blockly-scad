@@ -19,4 +19,8 @@ code {
 .gutter {
   background: #282c34;
   border: 2px solid #333333;
+  cursor: ew-resize;
+}
+.gutter-vertical {
+  cursor: ns-resize;
 }
