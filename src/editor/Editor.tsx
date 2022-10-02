@@ -24,18 +24,17 @@ export class Editor extends Component<unknown, Editor> {
     },
     rules: {
       semi: ["error", "always"],
-      indent: ["error", 4],
+      indent: ["error", 2],
     },
   };
   editorState: EditorState = EditorState.create({
-    doc: `console.log(\nArray(10)\n.fill(0)\n.map(() => 'WOW')\n.join('... Wait! What? ')\n);`,
+    doc: `console.log(\n  Array(10)\n    .fill(0)\n    .map(() => 'WOW')\n    .join('... Wait! What? ')\n);`,
     extensions: [
       basicSetup,
       keymap.of(defaultKeymap),
       javascript(),
       darcula,
       lintGutter(),
-      //@ts-ignore
       linter(esLint(new Linter(), this.eslintConfig)),
     ],
   });
@@ -51,6 +50,7 @@ export class Editor extends Component<unknown, Editor> {
         parent: this.editorElement,
       });
 
+//      this.editorView.state.readOnly = true;
       this.editorView.dom.style.height = '100%';
     }
   }
