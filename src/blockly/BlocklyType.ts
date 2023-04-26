@@ -1,4 +1,4 @@
-import { getMainWorkspace, BlocklyOptions, Workspace } from 'core/blockly';
+import { getMainWorkspace, BlocklyOptions, Workspace } from 'blockly';
 
 export interface BlocklyType {
   getMainWorkspace: typeof getMainWorkspace;

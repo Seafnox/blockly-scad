@@ -1,4 +1,4 @@
-import BlocklyType from 'core/blockly';
+import BlocklyType from 'blockly';
 import { Component, CSSProperties } from 'react';
 import { IdeEventBusCallback } from '../services/ideEventBus';
 import { BlocklyService } from './BlocklyService';

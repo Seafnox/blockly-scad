@@ -7,7 +7,7 @@ import { EditorView, keymap, EditorViewConfig } from '@codemirror/view';
 import { defaultKeymap } from '@codemirror/commands';
 import { javascript, esLint } from '@codemirror/lang-javascript';
 //@ts-ignore
-import { Linter } from 'eslint-linter-browserify/linter';
+import { Linter } from 'eslint-linter-browserify';
 
 export class Editor extends Component<unknown, Editor> {
   editorElement: HTMLElement | null = null;
